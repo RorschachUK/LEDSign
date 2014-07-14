@@ -46,27 +46,29 @@ void PartMatrix::render(Particle_Abstract particles[], byte numParticles)
         //bottom left
         col = particles[i].x / PS_P_RADIUS;
         row = particles[i].y / PS_P_RADIUS;
-        tempVal = ((unsigned long)dx*dy*particles[i].ttl)>>10; //divide by PS_P_SURFACE == 1024
+        //tempVal = ((unsigned long)dx*dy*particles[i].ttl)>>10; //divide by PS_P_SURFACE == 1024
+		tempVal = ((unsigned long)dx*dy*particles[i].ttl)/PS_P_SURFACE;
         addColor(col, row, &baseRGB, tempVal);
 
         //bottom right;
         col++;
         if (col < PS_PIXELS_X) {
-            tempVal = ((unsigned long)(PS_P_RADIUS-dx)*dy*particles[i].ttl)>>10; //divide by PS_P_SURFACE == 1024
+            //tempVal = ((unsigned long)(PS_P_RADIUS-dx)*dy*particles[i].ttl)>>10; //divide by PS_P_SURFACE == 1024
+			tempVal = ((unsigned long)(PS_P_RADIUS-dx)*dy*particles[i].ttl) / PS_P_SURFACE;
             addColor(col, row, &baseRGB, tempVal);
         }
 
         //top right
         row++;
         if (col < PS_PIXELS_X && row < PS_PIXELS_Y) {
-            tempVal = ((unsigned long)(PS_P_RADIUS-dx)*(PS_P_RADIUS-dy)*particles[i].ttl)>>10; //divide by PS_P_SURFACE == 1024
+            tempVal = ((unsigned long)(PS_P_RADIUS-dx)*(PS_P_RADIUS-dy)*particles[i].ttl)/PS_P_SURFACE;//>>10; //divide by PS_P_SURFACE == 1024
             addColor(col, row, &baseRGB, tempVal);
         }
 
         //top left
         col--;
         if (row < PS_PIXELS_Y) {
-            tempVal = ((unsigned long)dx*(PS_P_RADIUS-dy)*particles[i].ttl)>>10; //divide by PS_P_SURFACE == 1024
+            tempVal = ((unsigned long)dx*(PS_P_RADIUS-dy)*particles[i].ttl)/PS_P_SURFACE;//>>10; //divide by PS_P_SURFACE == 1024
             addColor(col, row, &baseRGB, tempVal);
         }
     }

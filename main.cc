@@ -15,7 +15,7 @@
 using std::min;
 using std::max;
 
-const byte numParticles = 60;
+const byte numParticles = 250;
 
 // Base-class for a Thread that does something with a matrix.
 class RGBMatrixManipulator : public Thread {
@@ -78,7 +78,9 @@ public:
 class ParticleSpin: public RGBMatrixManipulator {
 public:
 	ParticleSpin(RGBMatrix *m) : RGBMatrixManipulator(m), 
+		//emitter(PS_PIXELS_X * PS_P_RADIUS / 2, PS_PIXELS_Y * PS_P_RADIUS / 2, 5, 7), pSys(numParticles, particles, &emitter) {}
 		emitter(112, 112, 5, 7), pSys(numParticles, particles, &emitter) {}
+		//emitter(32, 8, 5, 7), pSys(numParticles, particles, &emitter) {}
 	void Run() {
 		pMatrix.reset();
 		PartMatrix::isOverflow = true;
